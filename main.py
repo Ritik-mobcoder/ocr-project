@@ -18,14 +18,14 @@ if __name__ == "__main__":
     extractor = PDFTextExtractor(pdf_path, text_output_path)
     extractor.extract_text_to_file()
     
-    #Image To Text
-    text_output_path = 'output/image_text.txt'
-    extractor = ImageTextExtractor(img_path, text_output_path)
-    ocr_result = extractor.extract_text_to_img()
+    # #Image To Text
+    # text_output_path = 'output/image_text.txt'
+    # extractor = ImageTextExtractor(img_path, text_output_path)
+    # ocr_result = extractor.extract_text_to_img()
     
-    #Imaage to Table
-    image_processor = ImageProcessor("input/nutrition_table.jpg")
-    image_processor.process()
-    print("Image To Table Created")
+    # #Imaage to Table
+    # image_processor = ImageProcessor("input/nutrition_table.jpg")
+    # image_processor.process()
+    # print("Image To Table Created")
 
 

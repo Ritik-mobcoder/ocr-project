@@ -9,6 +9,7 @@ from Extraction import (
     ImageTextExtractor,
     ImageProcessor,
 )
+import shutil
 
 
 app = FastAPI()
@@ -51,6 +52,7 @@ async def upload_file(file: UploadFile = File(...)):
             pdf_text_extractor.extract_text_to_file()
 
         else:
+            # Image Processing
             image_output_dir = os.path.join(output_dir, "image")
             os.makedirs(image_output_dir, exist_ok=True)
 
@@ -85,12 +87,11 @@ async def upload_file(file: UploadFile = File(...)):
             content={"message": f"Error during processing: {str(e)}"}, status_code=500
         )
     finally:
+        # Ensure files and directories are cleaned up properly
         if os.path.exists(file_path):
             os.remove(file_path)
+
+        # Use shutil.rmtree() to remove non-empty directories
         for folder in [output_dir, input_dir]:
             if os.path.exists(folder):
-                for root, dirs, files in os.walk(folder):
-                    for f in files:
-                        os.remove(os.path.join(root, f))
-                    for d in dirs:
-                        os.rmdir(os.path.join(root, d))
+                shutil.rmtree(folder)  # Recursively delete the folder and its contents

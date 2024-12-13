@@ -4,7 +4,6 @@ from pypdf import PdfReader
 import cv2
 import numpy as np
 import pytesseract
-from PIL import Image
 import subprocess
 
 
